@@ -47,7 +47,7 @@ PETData = PETData.drop(['Unnamed: 0'], axis=1)
 PETData = PETData.set_index('date')
 
 # select only the decade we want
-dataConcat = pd.concat([PETData['Jan 2080':'Dec 2089']])
+dataConcat = pd.concat([PETData['Jan 2081':'Dec 2090']])
 
 # Create new df and preds
 nConcat = df[['date']]
@@ -69,7 +69,7 @@ preds = dataConcat[['pred-1','pred-2','pred-3','pred-4','pred-5','pred-6','pred-
 preds['mode'] = preds.mode(axis=1)[0]
 pred = preds[['mode']]
 
-pred.to_csv('predictions/2080-2089.csv')
+pred.to_csv('predictions/2081-2090.csv')
 # import code; code.interact(local=dict(globals(), **locals()))
 
 
