@@ -1,6 +1,4 @@
-from base import *
-from createFrquencyTable import create_frequency_table, create_relative_freuqncy_table
-
+from createFrquencyTable import *
 
 CSVFilename = 'measured-climate-data/measured-with-observed-only.csv' ### <<<<< Change this file when needed
 data = pd.read_csv(CSVFilename, index_col=False)

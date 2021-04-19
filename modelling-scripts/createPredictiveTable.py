@@ -57,48 +57,6 @@ def create_predictive_decade(weatherData, decade_start, decade_end, bin_edges):
   return preds
 
 
-# ------------------------------ data ---------------------------
-
-# get original bin edges
-CSVFilename = 'measured-climate-data/measured-with-observed-only.csv' ### <<<<< Change this file when needed
-data = pd.read_csv(CSVFilename, index_col=False)
-df = data[['date','PET','amount']]
-bin_edges = create_bin_edges(df, "PET")
-
-
-# get culmulative frequency table
-CSVFilename = 'for-modeling/cumulative-freqency.csv' ### <<<<< Change this file when needed
-cum = pd.read_csv(CSVFilename, index_col=False)
-
-
-
-# Get the modelled climate data
-CSVFilename = 'climate-data/pet_all.csv'
-PETData = createDFFromFile(CSVFilename)
-PETData = PETData.drop(['Unnamed: 0'], axis=1)
-PETData = PETData.set_index('date')
-
-
-
-
-
-
-
-# # iterate over the bin
-# for x in ['1','2','3','4','5','6','7','8','9','10','11','12']:
-#     print(x)
-#     # Assign it to abin - accodring to the first threshold
-#     binName = 'bin-' + x
-#     predName = 'pred-' + x
-#     dataConcat[binName] = pd.cut(dataConcat[x], bins=bin_edges, labels=False, include_lowest=True)
-#     dataConcat = dataConcat.dropna()  
-#     dataConcat[predName] = dataConcat.apply(lambda row: predict_rank(row[binName]), axis=1)
-
-# preds = dataConcat[['pred-1','pred-2','pred-3','pred-4','pred-5','pred-6','pred-7','pred-8','pred-9','pred-10','pred-11','pred-12']]
-# preds['mode'] = preds.mode(axis=1)[0]
-# pred = preds[['mode']]
-pred = create_predictive_decade(PETData, '2001', '2010', bin_edges)
-# pred.to_csv('predictions/1981-1990.csv')
 
 
 
