@@ -19,9 +19,9 @@ def get_rank(number, ranked_series):
 def predict_rank(row):
     number = random.uniform(0, 1)
     cbin = str(int(row))
-
     ranked_series = cum[cbin]
     rank = get_rank(number, ranked_series)
+
     return rank
 
 
@@ -32,7 +32,15 @@ def predict_rank(row):
 CSVFilename = 'measured-climate-data/measured-with-observed-only.csv' ### <<<<< Change this file when needed
 data = pd.read_csv(CSVFilename, index_col=False)
 df = data[['date','PET','amount']]
-results, bin_edges = pd.qcut(df["PET"],q=10,labels=False,precision=0,retbins=True)
+results, obin_edges = pd.qcut(df["PET"],q=10,labels=False,precision=0,retbins=True)
+
+# remove lower and upper limits
+be = obin_edges[:-1]
+b = np.delete(be, [0])
+
+bin_edges = np.append(b,[float("inf")])
+bin_edges = np.insert(bin_edges, 0, -float("inf"), axis=0)
+
 
 # get culmulative frequency table
 CSVFilename = 'for-modeling/cumulative-freqency.csv' ### <<<<< Change this file when needed
@@ -47,7 +55,7 @@ PETData = PETData.drop(['Unnamed: 0'], axis=1)
 PETData = PETData.set_index('date')
 
 # select only the decade we want
-dataConcat = pd.concat([PETData['Jan 2081':'Dec 2090']])
+dataConcat = pd.concat([PETData['Jan 1981':'Dec 2000']])
 
 # Create new df and preds
 nConcat = df[['date']]
@@ -69,8 +77,7 @@ preds = dataConcat[['pred-1','pred-2','pred-3','pred-4','pred-5','pred-6','pred-
 preds['mode'] = preds.mode(axis=1)[0]
 pred = preds[['mode']]
 
-pred.to_csv('predictions/2081-2090.csv')
-# import code; code.interact(local=dict(globals(), **locals()))
+pred.to_csv('predictions/1981-1990.csv')
 
 
 
