@@ -1,31 +1,5 @@
 from base import *
-
-def get_rank(number, ranked_series):
-  if number > 0 and number < ranked_series[0]:
-    rank = 1
-  elif (number > ranked_series[0]) and (number < ranked_series[1]):
-    rank = 2
-  elif number > ranked_series[1] and number < ranked_series[2]:
-    rank = 3
-  elif number > ranked_series[2] and number < ranked_series[3]:
-    rank = 4
-  elif number > ranked_series[3] and number < ranked_series[4]:
-    rank = 5
-  else:
-    print("something went wrong!")
-  return rank
-
-# is given a bin number - returns likely rank according to random number
-def predict_rank(row):
-    number = random.uniform(0, 1)
-    cbin = str(int(row))
-    # if cbin == '9':
-    #   import code; code.interact(local=dict(globals(), **locals()))
-    ranked_series = cum[cbin]
-    rank = get_rank(number, ranked_series)
-    # import code; code.interact(local=dict(globals(), **locals()))
-
-    return rank
+from createPredictiveFreqTable import get_rank, predict_rank
 
 
 
