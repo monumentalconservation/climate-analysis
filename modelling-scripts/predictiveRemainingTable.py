@@ -1,4 +1,4 @@
-from createPredictiveFreqTable import get_rank, predict_rank, 
+from createPredictiveTable import *
 
 
 # ------------------------------ data ---------------------------
@@ -13,7 +13,6 @@ bin_edges = create_bin_edges(df, "remaining")
 # get culmulative frequency table
 CSVFilename = 'for-modeling/cumulative-freqency-remaining.csv' ### <<<<< Change this file when needed
 cum = pd.read_csv(CSVFilename, index_col=False)
-
 
 
 # Get the modelled climate data
