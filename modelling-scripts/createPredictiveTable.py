@@ -48,7 +48,9 @@ def create_predictive_decade(weatherData, decade_start, decade_end, bin_edges):
       binName = 'bin-' + x
       predName = 'pred-' + x
       dataConcat[binName] = pd.cut(dataConcat[x], bins=bin_edges, labels=False, include_lowest=True)
-      dataConcat = dataConcat.dropna()  
+      dataConcat = dataConcat.dropna() 
+      import code; code.interact(local=dict(globals(), **locals()))
+ 
       dataConcat[predName] = dataConcat.apply(lambda row: predict_rank(row[binName]), axis=1)
 
   preds = dataConcat[['pred-1','pred-2','pred-3','pred-4','pred-5','pred-6','pred-7','pred-8','pred-9','pred-10','pred-11','pred-12']]

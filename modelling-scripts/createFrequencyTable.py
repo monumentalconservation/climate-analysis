@@ -1,3 +1,5 @@
+import sys
+sys.path.append('./')
 from base import *
 
 # df must include 'amount' column
@@ -8,7 +10,7 @@ def create_frequency_table(df, column):
   return frequency
 
 
-def create_relative_freuqncy_table(df):
+def create_relative_frequency_table(df):
   ndf = df.copy()
   ndf.columns = [0,1,2,3,4,5,6,7,8,9]
   ndf['0rf'] = ndf.apply(lambda row: row[0]/(ndf[0].sum()), axis = 1) 
@@ -35,7 +37,7 @@ df = data[['date','PET','amount']]
 fre = create_frequency_table(df, 'PET')
 # fre.to_csv('for-modeling/freqency.csv')
 
-relFre = create_relative_freuqncy_table(fre)
+relFre = create_relative_frequency_table(fre)
 # relFre.to_csv('for-modeling/relative-freqency.csv')
 
 cum = relFre.cumsum()
